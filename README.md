@@ -12,7 +12,7 @@ This application consists in 3 modules:
 **Airlines**  
 
 
-the application should meet below requirements:
+The application should meet below requirements:
  
  **Use Cases:**
  1. User can reserve *'N'* flights
