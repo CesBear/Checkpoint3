@@ -32,4 +32,4 @@ the application should meet below requirements:
 #### Team Members:
 1. Ale Zuñiga 
 2. Juan Carlos
-3. Cesar Ramírez
+3. Cesar Ramírez.
