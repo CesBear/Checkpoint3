@@ -5,7 +5,7 @@ const User = mongoose.model('users');
 // Revisar Conexion
 module.exports = (app) => {
 	app.get('/', (req, res) => {
-		res.send({ mensaje: 'hola' });
+		res.send({ message: 'Checkpoint 3 api working' });
 	});
 
 // Traer todos los usuarios
@@ -22,33 +22,39 @@ module.exports = (app) => {
 
 // Insertar Usuario
 	app.post(
-		'/api/users/', 
+		'/api/users/',
+        usersMiddleware.datosCompletos,
+        usersMiddleware.datosPrimitivos,
+    	usersMiddleware.datosValidos,
 		async (req, res) => {
-		const { nombre, apellidos, edad, pasaporte, nacionalidad } = req.body;
+		const { name: name, lastName, age, passport, nationality } = req.body;
 
 		const userPost = new User({
-			nombre, apellidos, edad, pasaporte, nacionalidad
+			name: name, lastName, age, passport, nationality
 		});
-		const respuesta = await userPost.save();
-		res.send(respuesta);
+		const response = await userPost.save();
+		res.send(response);
 	});
 
 // Modificar Usuario	
 	app.put(  // checar que PUT no cause conflicto con axios
-		'/api/users/:id', 
+		'/api/users/:id',
+        usersMiddleware.datosCompletos,
+        usersMiddleware.datosPrimitivos,
+        usersMiddleware.datosValidos,
 		async (req, res) => {
-		const { nombre, apellidos, edad, pasaporte, nacionalidad } = req.body;
-		const respuesta = await User.findOneAndUpdate(
+		const { name: name, lastName, age, passport, nationality} = req.body;
+		const response = await User.findOneAndUpdate(
 			{ _id: req.params.id }, 
-			{ nombre, apellidos, edad, pasaporte, nacionalidad }, 
+			{ name: name, lastName, age, passport, nationality},
 			{ new: true }
 		).exec();
-		res.send(respuesta);
+		res.send(response);
 	});	
 
 	app.delete('/api/users/:id', async (req, res) => {
-		const respuesta = await User.deleteOne({ _id: req.params.id });
-		res.send(respuesta);
+		const response = await User.deleteOne({ _id: req.params.id });
+		res.send(response);
 		}
 	);
 };

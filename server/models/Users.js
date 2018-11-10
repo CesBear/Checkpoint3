@@ -2,17 +2,18 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-   nombre: {
+   name: {
       type: String,
       required: true
    },
-   apellidos: {
+   lastName: {
       type: String,
       required: true
    },
-   edad: String,
-   pasaporte: String,
-   nacionalidad: String,
+   age: Number,
+   passport: String,
+   nationality: String,
+    reservations: [],
    create_date: {
       type: Date,
       default: Date.now
