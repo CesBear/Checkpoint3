@@ -2,53 +2,54 @@ const mongoose = require('mongoose');
 const usersMiddleware = require('../middlewares/usersMiddleware');
 const User = mongoose.model('users');
 
-// Revisar Conexion
+// Check Conection 
 module.exports = (app) => {
 	app.get('/', (req, res) => {
 		res.send({ mensaje: 'hola' });
 	});
 
-// Traer todos los usuarios
+// All Users
 	app.get('/api/users', async (req, res) => {
 		const users = await User.find({});
 		res.send(users)
 	});
 
-// Traer usuario por ID
+// User by ID
 	app.get('/api/users/:id', async (req, res) => {
 		const users = await User.find({ _id: req.params.id });
 		res.send(users)
 	});
 
-// Insertar Usuario
+// Insert User
 	app.post(
 		'/api/users/', 
 		async (req, res) => {
-		const { nombre, apellidos, edad, pasaporte, nacionalidad } = req.body;
+		const { name, lastName, age, passport, nationality, reservations } = req.body;
 
 		const userPost = new User({
 			nombre, apellidos, edad, pasaporte, nacionalidad
 		});
-		const respuesta = await userPost.save();
-		res.send(respuesta);
+		const response = await userPost.save();
+		res.send(response);
 	});
 
-// Modificar Usuario	
+// Update User
 	app.put(  // checar que PUT no cause conflicto con axios
 		'/api/users/:id', 
 		async (req, res) => {
-		const { nombre, apellidos, edad, pasaporte, nacionalidad } = req.body;
-		const respuesta = await User.findOneAndUpdate(
+		const { name, lastName, age, passport, nationality, reservations } = req.body;
+		const response = await User.findOneAndUpdate(
 			{ _id: req.params.id }, 
-			{ nombre, apellidos, edad, pasaporte, nacionalidad }, 
+			{ name, lastName, age, passport, nationality, reservations }, 
 			{ new: true }
 		).exec();
-		res.send(respuesta);
+		res.send(response);
 	});	
 
+// Delete User
 	app.delete('/api/users/:id', async (req, res) => {
-		const respuesta = await User.deleteOne({ _id: req.params.id });
-		res.send(respuesta);
+		const response = await User.deleteOne({ _id: req.params.id });
+		res.send(response);
 		}
 	);
 };
