@@ -1,20 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const mongoose = require('mongoose');
 
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send({ usuarios: 'test usuarios'});
-});
+require('./server/models/Users');
+mongoose.connect('mongodb://user:usercheckpoint3@ds157853.mlab.com:57853/checkpoint3');
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
-    const path = require('path');
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client','build', 'index.html'));
-    });
-}
+app.use(bodyParser.json());
 
-app.listen(process.env.PORT || 5000);
+const usersRoutes = require('./server/routes/usersRoutes');
+usersRoutes(app);
 
+app.listen(5000);
