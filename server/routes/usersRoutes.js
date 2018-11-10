@@ -23,9 +23,9 @@ module.exports = (app) => {
 // Insertar Usuario
 	app.post(
 		'/api/users/',
-        usersMiddleware.datosCompletos,
-        usersMiddleware.datosPrimitivos,
-    	usersMiddleware.datosValidos,
+        usersMiddleware.completeData,
+        usersMiddleware.primitiveData,
+        usersMiddleware.validData,
 		async (req, res) => {
 		const { name: name, lastName, age, passport, nationality } = req.body;
 
@@ -39,9 +39,9 @@ module.exports = (app) => {
 // Modificar Usuario	
 	app.put(  // checar que PUT no cause conflicto con axios
 		'/api/users/:id',
-        usersMiddleware.datosCompletos,
-        usersMiddleware.datosPrimitivos,
-        usersMiddleware.datosValidos,
+        usersMiddleware.completeData,
+        usersMiddleware.primitiveData,
+        usersMiddleware.validData,
 		async (req, res) => {
 		const { name: name, lastName, age, passport, nationality} = req.body;
 		const response = await User.findOneAndUpdate(

@@ -1,5 +1,5 @@
 module.exports = (() => {
-    const datosCompletos = (req, res, next) => {
+    const completeData = (req, res, next) => {
         const { name, lastName, age, nationality, passport } = req.body;
 
         if (!name) res.send('Name is missing.');
@@ -11,7 +11,7 @@ module.exports = (() => {
         next();
     };
 
-    const datosPrimitivos = (req, res, next) => {
+    const primitiveData = (req, res, next) => {
         const { name, lastName, age, nationality } = req.body;
 
         if (typeof(name) != 'string') res.send('The name should be only text.');
@@ -22,7 +22,7 @@ module.exports = (() => {
         next();
     };
 
-    const datosValidos = (req, res, next) => {
+    const validData = (req, res, next) => {
         const { name, lastName, age  } = req.body;
 
         if (name.trim().length > 30) res.send('30 chars length max.');
@@ -33,8 +33,8 @@ module.exports = (() => {
     };
 
     return {
-        datosCompletos,
-        datosPrimitivos,
-        datosValidos
+        completeData,
+        primitiveData,
+        validData
     }
 })();

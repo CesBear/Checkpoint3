@@ -4,7 +4,6 @@
     <list default="true" id="cc008210-48fd-4080-a44a-9cb4aef120ad" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/middlewares/usersMiddleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/middlewares/usersMiddleware.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/Users.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/Users.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes/usersRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/usersRoutes.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -32,7 +31,7 @@
         <counts>
           <entry key="gitignore" value="4" />
           <entry key="html" value="1" />
-          <entry key="js" value="13" />
+          <entry key="js" value="15" />
           <entry key="json" value="4" />
           <entry key="md" value="3" />
         </counts>
@@ -41,7 +40,7 @@
         <counts>
           <entry key="HTML" value="1" />
           <entry key="JSON" value="4" />
-          <entry key="JavaScript" value="13" />
+          <entry key="JavaScript" value="15" />
           <entry key="Markdown" value="3" />
           <entry key="PLAIN_TEXT" value="4" />
         </counts>
@@ -50,7 +49,7 @@
         <counts>
           <entry key="gitignore" value="1" />
           <entry key="html" value="3" />
-          <entry key="js" value="768" />
+          <entry key="js" value="807" />
           <entry key="json" value="1" />
           <entry key="md" value="849" />
         </counts>
@@ -59,7 +58,7 @@
         <counts>
           <entry key="HTML" value="3" />
           <entry key="JSON" value="1" />
-          <entry key="JavaScript" value="768" />
+          <entry key="JavaScript" value="807" />
           <entry key="Markdown" value="849" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
@@ -69,19 +68,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/server/middlewares/usersMiddleware.js">
+        <entry file="file://$PROJECT_DIR$/server/routes/usersRoutes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+            <state relative-caret-position="162">
+              <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/models/Users.js">
+        <entry file="file://$PROJECT_DIR$/server/middlewares/usersMiddleware.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="36" lean-forward="true" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+            <state relative-caret-position="394">
+              <caret line="37" column="17" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -114,8 +113,8 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/client/.gitignore" />
         <option value="$PROJECT_DIR$/server/models/Users.js" />
-        <option value="$PROJECT_DIR$/server/routes/usersRoutes.js" />
         <option value="$PROJECT_DIR$/server/middlewares/usersMiddleware.js" />
+        <option value="$PROJECT_DIR$/server/routes/usersRoutes.js" />
       </list>
     </option>
   </component>
@@ -138,10 +137,10 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="176" />
-    <option name="y" value="23" />
-    <option name="width" value="974" />
-    <option name="height" value="775" />
+    <option name="x" value="7" />
+    <option name="y" value="42" />
+    <option name="width" value="1380" />
+    <option name="height" value="735" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -254,10 +253,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9585000" />
+    <option name="totallyTimeSpent" value="10423000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23363096" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -361,13 +361,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/routes/usersRoutes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/models/Users.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -377,8 +370,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/middlewares/usersMiddleware.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+        <state relative-caret-position="394">
+          <caret line="37" column="17" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/routes/usersRoutes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
         </state>
       </provider>
     </entry>
