@@ -4,12 +4,12 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-require('./server/models/Users');
+require('./server/models/Providers');
 mongoose.connect('mongodb://user:usercheckpoint3@ds157853.mlab.com:57853/checkpoint3');
 
 app.use(bodyParser.json());
 
-const usersRoutes = require('./server/routes/usersRoutes');
-usersRoutes(app);
+const providersRoutes = require('./server/routes/providersRoutes');
+providersRoutes(app);
 
 app.listen(5000);
