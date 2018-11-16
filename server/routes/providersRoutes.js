@@ -13,7 +13,6 @@ module.exports = (app) => {
         res.send({ message: 'Api is loading' });
     });
 
-
 	app.get('/api/providers', async (req, res) => {
 		const providers = await Providers.find({});
 		res.send(providers)
