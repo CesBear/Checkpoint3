@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Input } from 'react-materialize';
 import * as ProvidersActions from '../actions/providersActions';
 
 
@@ -34,3 +35,8 @@ const ProvidersForm = (props) => {
 
 const mapStateToProps = ({ providersReducer }) => providersReducer;
 export default connect(mapStateToProps, ProvidersActions) (ProvidersForm);
+
+
+
+
+

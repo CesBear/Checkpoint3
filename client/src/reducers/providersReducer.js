@@ -31,12 +31,13 @@ const INITIAL_STATE = {
         stock: 0,
         guarantee: ''
         }
-    	]
+    	],
+    redirect: false
 };
 
 export default (state = INITIAL_STATE, action) => {
 	const providersList = (name) => state.name.findIndex((name) =>{
-		return name === name
+		return name 
 	});
 
 switch ( action.type) {
@@ -65,7 +66,8 @@ switch ( action.type) {
 	        stock: 0,
 	        guarantee: ''
 	        }
-	    	]
+	    	],
+	    redirect: false
 		};
 	case FAIL_PROVIDERS:
 		console.log(action.payload);
@@ -83,7 +85,7 @@ switch ( action.type) {
 	case LOADING_PROVIDERS: return {
 		...state,
 		loading: false,
-		name: action.payload
+		name: action.payload,
 		address: action.payload.address,
 		phone: action.payload.phone,
 		rfc: action.payload.rfc,

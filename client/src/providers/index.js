@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Table, Icon, Button, Preloader, Modal } from 'react-materialize';
 import * as ProvidersActions from '../actions/providersActions';
+import providersReducer from '../reducers/providersReducer';
 import * as Paths from '../paths';
 import MessageErr from '../components/messageErr';
 
@@ -32,14 +34,14 @@ localShowErr = () => (
 FormValidation = () => (
     this.props.name || this.props.category || this.props.address || this.props.phone || this.props.rfc || this.props.products
     );
-};
+
 
 render() {
 	return (
 		<div>
 			<div className= 'valign-wrapper' >
 				<h1>Providers</h1>
-				<link to= {paths.ADD_PROVIDERS}>
+				<link to= {Paths.ADD_PROVIDERS}>
 					<Button floating large className='red lighten-1' waves='light' icon='add' />
 				</link>
 			</div>
@@ -51,6 +53,7 @@ render() {
 		</div>
 		);
 };
+}
 
 const mapStateToProps = ({ providersReducer }) => providersReducer;
 export default connect(mapStateToProps, ProvidersActions)(Providers);

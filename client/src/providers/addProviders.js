@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Preloader } from 'react-materialize';
 import { Redirect } from 'react-router-dom';
-import providersReducer from '../reducers/providersReducer';
+import ProvidersReducer from '../reducers/providersReducer';
 import * as ProvidersAction from '../actions/providersActions';
-import ProvidersForm from './ProvidersForm';
+import ProvidersForm from './providersForm';
+import * as Paths from '../paths';
 
 class AddProvider extends Component {
 	componentDidMount () {
-		if (this.porps.match.params.name) {
+		if (this.props.match.params.name) {
 			this.props.LoadProviders(this.props.match.params.name)
 		}
 		else if (!this.props.name) {
-			this.porps.newForm();
+			this.props.newForm();
 		}
 	}
 
@@ -36,7 +37,7 @@ createNewProvider = () => ({
 showSaveButton = () => (
 	<div className="row">
       <Button className="col s6 offset-m2 m4" waves='light'
-              disabled={ !this.FormValidation() }
+              disabled={ !this.formValidation() }
               onClick={ this.clickSave }>
         Save
       </Button>
@@ -52,37 +53,34 @@ showPreloader = () => (
 showSaveButton = () => (
   <div className="row">
       <Button className="col s6 offset-m2 m4" waves='light'
-              disabled={ !this.FormValidation() }
-              onClick={ this.clickGuardar }>
+              //disabled={ !this.formValidation() }
+              onClick={ this.clickSave }>
         Guardar
       </Button>
       <Button className="col s6 m4 red" waves='light'
-              onClick={ () => this.props.activarRedireccionAInicio(true) }>
+              onClick={ () => this.props.redirect(true) }>
         Cancelar
       </Button>
     </div>
   );
 
 clickSave = () => {
-  const { name,
-          category,
-          address,
-          phone,
-          rfc
-        } = this.props;
-
-  const providerInfo = { name, category, address, phone, rfc };
-  this.props.addprovider(providerInfo, this.props.providers);
+  const providerInfo = this.createNewProvider();
+  const idProvider = this.props.match.params.name;
+  idProvider ? this.props.LoadProviders(idProvider, providerInfo) : this.props.AddProviders(providerInfo);
   };
 
+formValidation = () => 
+    this.props.name && this.props.category && this.props.address && this.props.address && this.props.phone && this.props.phone && this.props.rfc;
+
 render() {
-  return this.props.providerInfo;
+  return this.props.redirect ? 
+  ( <Redirect to= {Paths.ADD_PROVIDERS} />) :
   (<div>
-    <providersForm/>
-    { this.props.name ? this.props.createNewProvider() : this.props.showSaveButton() }
+    <ProvidersForm/>
+    { this.props.name ? this.showPreloader() : this.showSaveButton() }
     </div>);
   }
-
 }
 
 const mapStateToProps = ({ providersReducer }) => ProvidersReducer;
