@@ -1,13 +1,13 @@
 import React from 'react';
 import { Icon, Button } from 'react-materialize';
 
-const MenssageErr = (props) => (
+const MessageErr = (props) => (
   <div className="center-align">
-    <Icon className="red-text text-darken-4" large>error</Icon>
-    <h4>{props.tituloError}</h4>
-    <p><b>Mensaje:</b> {props.mensajeError}</p>
-    <Button className="red" onClick={props.accion}>Regresar</Button>
+    <Icon className="red-text text-darken-4" large>Fail</Icon>
+    <h4>{props.titleErr}</h4>
+    <p><b>Message:</b> {props.titleErr}</p>
+    <Button className="red" onClick={props.accion}>Go Back</Button>
   </div>
 );
 
-export default MenssageErr;
+export default MessageErr;

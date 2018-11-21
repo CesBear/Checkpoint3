@@ -1,4 +1,7 @@
 import { combineReducers } from 'redux';
-import  ProvidersReducer  from './providersReducer';
+import ProvidersReducers from './providersReducer';
 
-export default combineReducers( {ProvidersReducer });
+
+export default combineReducers({ 
+	ProvidersReducers
+});

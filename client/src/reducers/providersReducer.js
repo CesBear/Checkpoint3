@@ -1,123 +1,92 @@
-import { 
-	NEW_FORM, 
-	FAIL_PROVIDERS,
-	CLEAR_FAIL,
-	START_PROVIDERS,
-	LOADING_PROVIDERS,
-	NEW_PROVIDERS,
-	LOADING_ONE_PROVIDER,
-	NAME,
-	CATEGORY,
-	ADDRESS,
-	PHONE,
-	RFC
-	 } from '../types/providersTypes.js';
+import {
+	CALL_PROVIDERS, 
+	PROVIDERS_LOADED, 
+	FAIL_TO_LOAD_PROVIDERS, 
+	CLEAR_FAIL, 
+	LOADING_ONE_PROVIDER, 
+	CREATE_NEW_PROVIDER, 
+	DELETE_PROVIDER, 
+	REDIRECTING, 
+	CLEAR_FORM
+} from '../types/providersTypes';
 
-const INITIAL_STATE = {
-	name: {
-      type: '',
+
+const INITIAL_SATE = {
+	providers: [{
+		name: {
+          type: ''
    		},
-   category: {
-      type: '',
+        category: {
+          type: '',
    		},
-   address: '',
-   phone: 0,
-   rfc: '',
-    products: [
-        {
-        _id: 0,
-        brand: '',
-        price: 0,
-        stock: 0,
-        guarantee: ''
-        }
-    	],
-    redirect: false
+        address: '',
+        phone: 0,
+        rfc: '',
+        products: [{
+          _id: 0,
+          brand: '',
+          price: 0,
+          stock: 0,
+          guarantee: ''
+          }]
+    }],
+    redirect: false,
+    err:'',
+    loading: false
 };
 
-export default (state = INITIAL_STATE, action) => {
-	const providersList = (name) => state.name.findIndex((name) =>{
-		return name 
+export default ( state = INITIAL_SATE, action ) => {
+	const getProvider = (name) => state.providers.findIndex((provider) => {
+		return provider._id === name
 	});
 
-switch ( action.type) {
-	case NAME: return { ...state, name: action.payload };
-	case CATEGORY: return { ...state, category: action.payload };
-	case ADDRESS: return { ...state, address: action.payload };
-	case PHONE: return { ...state, phone: action.payload };
-	case RFC: return { ...state, rfc: action.payload };
-	case NEW_FORM: return {
-		...state,
-		name: {
-	      type: '',
-	   		},
-	   	loading: false,
-	    category: {
-	      type: '',
-	   		},
-	    address: '',
-	    phone: 0,
-	    rfc: '',
-	    products: [
-	        {
-	        _id: 0,
-	        brand: '',
-	        price: 0,
-	        stock: 0,
-	        guarantee: ''
-	        }
-	    	],
-	    redirect: false
+	switch (action.type) {
+		case CALL_PROVIDERS : return { ...state, err:'', loading: true };
+		case PROVIDERS_LOADED : return { ...state, err:'', loading: false, providers: action.payload };
+		case FAIL_TO_LOAD_PROVIDERS : return { ...state, err: action.payload, loading: false };
+		case CLEAR_FAIL : return { ...state, arr:''};
+		case LOADING_ONE_PROVIDER : return { ...state, 
+											loading: false, 
+											name: action.payload.name, 
+											address: action.payload.address, 
+											phone: action.payload.phone, 
+											rfc: action.payload.rfc, 
+											category: action.payload.category, 
+											products: action.payload.products,
+											redirect: false };
+		case CREATE_NEW_PROVIDER : return { ...state, loading: false, providers: [action.payload, ...state.providers] };
+		case DELETE_PROVIDER : 
+			const deleteName = getProvider(action.payload.name)
+
+			if(deleteName >= 0 ) {
+				state.providers.splice( deleteName, 1 );
+			}
+			return { ...state, loading: false }; 
+		case REDIRECTING : return { ...state, redirect: action.payload };
+		case CLEAR_FORM : return { ...state, 
+									providers: [{
+										name: {
+								          type: ''
+								   		},
+								        category: {
+								          type: '',
+								   		},
+								        address: '',
+								        phone: 0,
+								        rfc: '',
+								        products: [{
+								          _id: 0,
+								          brand: '',
+								          price: 0,
+								          stock: 0,
+								          guarantee: ''
+								          }],
+								        redirect: false,
+								        err:'',
+								        loading: false
+									}]	
 		};
-	case FAIL_PROVIDERS:
-		console.log(action.payload);
-		return { ...state, err: action.payload, loading: false};
-
-	case CLEAR_FAIL: 
-		return { ...state, err:''};
-
-	case START_PROVIDERS: return {
-		...state,
-		err:'',
-		loading: true
-		};
-
-	case LOADING_PROVIDERS: return {
-		...state,
-		loading: false,
-		name: action.payload,
-		address: action.payload.address,
-		phone: action.payload.phone,
-		rfc: action.payload.rfc,
-		category: action.payload.category
-	};
-
-	case NEW_PROVIDERS: return {
-		...state,
-		loading: false,
-		name: [action.payload, ...state.providers]
-	};
-
-	case LOADING_ONE_PROVIDER: return {
-		...state,
-		loading: false,
-		name: action.payload.name,
-		address: action.payload.address,
-		phone: action.payload.phone,
-		rfc: action.payload.rfc,
-		category: action.payload.category
-	};
-
-
-
-	default: return state;
+		    default: return state;
 	}
 }
-
-
-
-
-
-
-
 

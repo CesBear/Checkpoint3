@@ -1,94 +1,78 @@
 import axios from 'axios';
-import { NEW_FORM, 
-	     FAIL_PROVIDERS, 
-	     CLEAR_FAIL, 
-	     START_PROVIDERS, 
-	     LOADING_PROVIDERS, 
-	     NEW_PROVIDERS, 
-	     LOADING_ONE_PROVIDER, 
-	     DELETE_PROVIDER, 
-	     SHOW_ERR,
-	     ADD_NAME, 
-	     ADD_CATEGORY,
-	     ADD_RFC,
-	     ADD_ADDRESS,
-	     ADD_PHONE }from '../types/providersTypes.js';
+import {
+	CALL_PROVIDERS, 
+	PROVIDERS_LOADED, 
+	FAIL_TO_LOAD_PROVIDERS, 
+	CLEAR_FAIL, 
+	LOADING_ONE_PROVIDER, 
+	CREATE_NEW_PROVIDER, 
+	DELETE_PROVIDER, 
+	REDIRECTING, 
+	CLEAR_FORM
+} from '../types/providersTypes';
 
-const TIME_TOAST = 4000;
+const TIME_TOAST = 6000;
 
-export const LoadProviders = () => async (dispatch) => {
-	dispatch ({ type: START_PROVIDERS });
+export const bringProviders = () => async (dispatch) => {
+	dispatch ({ type: CALL_PROVIDERS  });
+
 	try {
-		const response = await axios.get('https://jsonplaceholder.typicode.com/users');
+		const response = await axios.get('/');
+		dispatch({ type: PROVIDERS_LOADED, payload: response.data });
+	}
+	catch(err) {
+		dispatch({ tupe: FAIL_TO_LOAD_PROVIDERS, payload: err.message });
+	}
+};
+
+export const addProviders = (newProvider) => async (dispatch) => {
+	dispatch({type: CALL_PROVIDERS });
+	try {
+		const response = await axios.post('/', newProvider );
+		dispatch({ type: CREATE_NEW_PROVIDER, payload: response.data });
+		dispatch({ type: CLEAR_FORM });
+		window.Materialize.toast( 'A new Provider has been added', TIME_TOAST);
+	}
+	catch (err) {
+    	window.Materialize.toast(`Fail "${err.message}" to add a new Provider. Please try again later.`, TIME_TOAST);
+	}
+};
+
+export const getOneProvider = (name) => async (dispatch) => {
+	dispatch({ type: CALL_PROVIDERS });
+	try {
+		const response = await axios.get('/');
+		dispatch({ type: LOADING_ONE_PROVIDER, payload: response.data[0] });
+	}
+	catch (err) {
+		window.Materialize.toast( 'Fail to load Provider.', TIME_TOAST);
+
+	}
+};
+
+export const deleteProvider = (name) => async (dispatch) => {
+	dispatch({ type: CALL_PROVIDERS });
+	try {
+		const response = await axios.get('/');
 		response.data.reverse();
-		dispatch({ type: LOADING_PROVIDERS, payload: response.data });
+		dispatch({ type: FAIL_TO_LOAD_PROVIDERS, payload: name });
 	}
 	catch (err) {
-		dispatch({ type: FAIL_PROVIDERS, payload: err })
+		window.Materialize.toast(`Fail to "${err.message}" delete provider. Please try again later.`, TIME_TOAST)
 	}
 };
 
-export const AddProviders = (newProvider) => async (dispatch) => {
-	dispatch({ type: START_PROVIDERS });
-	try {
-		const response = await axios.post('https://jsonplaceholder.typicode.com/users', newProvider);
-		dispatch({ type: NEW_PROVIDERS, payload: response.data });
-		dispatch({ type: NEW_FORM });
-		window.Materialize.toast('Provider Added', TIME_TOAST);
+export const redirectActive = (redirect) => (dispatch) => {
+	if ( redirect ) {
+		dispatch({ type: CLEAR_FORM });
 	}
-	catch (err) {
-		window.Materialize.toast(`Fail "${err.message}" to add provider.`, TIME_TOAST);
-	}
-};
-
-export const getProviders = (name) => async (dispatch) => {
-	dispatch({ type: START_PROVIDERS });
-	try{
-		const response = await axios.get(`https://g2-ch2.herokuapp.com/api/usuarios/red/${name}`);
-		dispatch({ type: LOADING_ONE_PROVIDER, payload: response.data })
-	}
-	catch (err) {
-		window.Materialize.toast(`Unable to "${err.message}" load Provders`, TIME_TOAST);
-	}
-};
-
-export const eraseProvider = (name) => async (dispatch) => {
-	dispatch( {type: START_PROVIDERS} );
-	try{
-		await axios.delete(`https://g2-ch2.herokuapp.com/api/usuarios/red/${name}`);
-		dispatch({ type: DELETE_PROVIDER, payload: name });
-	}
-	catch (err) {
-		window.Materialize.toast(`Unable to "${err.message}" delete Provider`, TIME_TOAST);
-	}
-};
-export const showErr = () => (dispatch) => dispatch({ type: SHOW_ERR });
-
-export const newForm = () => (dispatch) => dispatch({ type: NEW_FORM });
-
-export const clearFail = () => (dispatch) => dispatch({ type: CLEAR_FAIL });
-
-export const addName = (name) => (dispatch) => {
-	dispatch({ type: ADD_NAME, payload: name });
-};
-
-export const addCategory = (category) => (dispatch) => {
-	dispatch({ type: ADD_CATEGORY, payload: category });
-};
-
-export const addRfc = (rfc) => (dispatch) => {
-	dispatch({ type: ADD_RFC, payload: rfc });
-};
-
-export const addAddress = (address) => (dispatch) => {
-	dispatch({ type: ADD_ADDRESS, payload: address });
-};
-export const addPhone = (phone) => (dispatch) => {
-	dispatch({ type: ADD_PHONE, payload: phone });
+	dispatch({ type: REDIRECTING, payload: redirect });
 };
 
 
+export const clearForm = () => (dispatch) => dispatch({ type: CLEAR_FORM });
 
+export const clearErr = () => (dispatch) => dispatch({type: CLEAR_FAIL});
 
 
 

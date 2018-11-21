@@ -1,18 +1,27 @@
 import React from 'react';
+import { Navbar, NavItem } from 'react-materialize';
 import { Link } from 'react-router-dom';
-import { Navbar, Icon } from 'react-materialize';
-import * as Paths from '../paths';
-import Providers from '../providers';
 
-const Header = () => (
-		<div>
-			<Navbar className= 'red lighten-1' right>
-      			<li><Link to={Paths.PROVIDERS}><Icon>account_circle</Icon></Link></li>
-      			<li><Link to={Paths.ADD_PROVIDERS}><Icon>person_add</Icon></Link></li>
-    		</Navbar>
-		</div>
-	);
+const Header = (props) => (
+	<Navbar left>
+		<li>
+			<Link to= '/'>
+				Home
+			</Link>
+		</li>
+		<li>
+			<Link to= '/Artist'>
+				Artist List
+			</Link>
+		</li>
+		<li>
+			<Link to= '/AddArtist'>
+				Add Artist
+			</Link>
+		</li>
+	</Navbar>
+);
+
 
 export default Header;
-
 
