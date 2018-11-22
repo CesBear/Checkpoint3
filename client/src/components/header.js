@@ -10,7 +10,7 @@ const Header = (props) => (
 			</Link>
 		</li>
 		<li>
-			<Link to= '/Artist'>
+			<Link to= '/artist'>
 				Artist List
 			</Link>
 		</li>

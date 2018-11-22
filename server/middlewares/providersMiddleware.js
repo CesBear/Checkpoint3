@@ -23,7 +23,6 @@ module.exports = (() => {
 
         next();
     };
-git add
     const primitiveData = (req, res, next) => {
         const { name, category, address, phone, rfc } = req.body;
 

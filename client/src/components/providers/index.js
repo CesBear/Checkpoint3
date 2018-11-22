@@ -11,9 +11,11 @@ import HalfDonneProvider from './halfDonneProvider';
 
 class Providers extends Component {
   componentDidMount() {
-    console.log(this.props);
-    this.props.bringProviders();
+    //console.log(this.props);
+    if(!this.props.providersConsult){
+      this.props.bringProviders();
     }
+  }
   
 
   Err = () => (
@@ -25,8 +27,8 @@ class Providers extends Component {
   noProvidersMessage = () => (
     <div className="center-align">
       <Icon large className="grey-text text-lighten-2">person_outline</Icon>
-      <h4>No Providers.</h4>
-      <p>Please <Link to={Paths.ADD_PROVIDERS}>add a new Provider</Link> right now.</p>
+      <h4>No  Artist.</h4>
+      <p>Please <Link to={Paths.ADD_PROVIDERS}>add a new Artist</Link> right now.</p>
     </div>
   );
 
@@ -43,13 +45,16 @@ class Providers extends Component {
       </thead>
       <tbody>
       { this.props.providers.map((provider) => (
-          <tr key={ provider.name }>
+          <tr key={provider._id}>
             <td className="hide-on-med-and-up">{this.getProvidersName(provider)}</td>
             <td className="hide-on-small-only">{provider.name}</td>
             <td className="hide-on-small-only">{provider.address}</td>
             <td className="hide-on-small-only">{provider.phone}</td>
             <td className="hide-on-small-only">{provider.category}</td>
-            <td><Link to={`${Paths.DISPLAY_PROVIDERS}`}><Icon>visibility</Icon></Link></td>
+            <td>
+            <Link to={`${Paths.DISPLAY_PROVIDERS}`}><Icon>visibility</Icon>
+            </Link>
+            </td>
             <td>
               <Modal header="Delete Provider"
                      actions={
@@ -78,17 +83,17 @@ class Providers extends Component {
   );
 
   validateForm = () =>
-    this.props.providers[0].name || this.props.providers[0].address || this.props.providers[0].phone || this.props.providers[0].rfc || this.props.providers[0].category ;
+    this.props.providers.name || this.props.providers.address || this.props.providers.phone || this.props.providers.rfc || this.props.providers.category ;
 
   getProvidersName = (provider) =>
-    `${provider.name} `;
+    `${provider.name} ${provider.address} ${provider.phone} ${provider.rfc}`;
 
   render() {
-    this.props.redirectActive(false);
+    //this.props.redirectActive(false);
     return (
       <div>
         <div className='valign-wrapper'  >
-          <h1>Providers</h1>
+          <h1>Artist</h1>
           <Link to={Paths.ADD_PROVIDERS}>
             <Button floating large className='red lighten-1' waves='light' icon='add' />
           </Link>
@@ -96,7 +101,7 @@ class Providers extends Component {
         {
           this.props.loading ?
             (<div className="center-align"><Preloader/></div>) :
-            (this.props.err ? this.Err() : this.showProviders())
+            (this.props.err ? this.Err() : this.showProvidersList())
         }
       </div>
     );

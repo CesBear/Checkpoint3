@@ -7,7 +7,12 @@ import {
 	CREATE_NEW_PROVIDER, 
 	DELETE_PROVIDER, 
 	REDIRECTING, 
-	CLEAR_FORM
+	CLEAR_FORM,
+	MODIFIED_PROVIDER,
+	ADD_NAME,
+	ADD_ADDRESS,
+	ADD_PHONE,
+	ADD_RFC
 } from '../types/providersTypes';
 
 
@@ -86,7 +91,19 @@ export default ( state = INITIAL_SATE, action ) => {
 								        loading: false
 									}]	
 		};
-		    default: return state;
+		case MODIFIED_PROVIDER:
+	      const idModificado = getProvider(action.payload._id);
+	      if (idModificado >= 0) {
+	        state.providers.splice(idModificado, 1, action.payload);
+	      }
+	      return { ...state, loading: false };
+
+	    case ADD_NAME: return { ...state, name: action.payload };
+	    case ADD_ADDRESS: return { ...state, address: action.payload };
+	    case ADD_PHONE: return { ...state, phone: action.payload };
+	    case ADD_RFC: return { ...state, rfc: action.payload };
+
+		default: return state;
 	}
 }
 

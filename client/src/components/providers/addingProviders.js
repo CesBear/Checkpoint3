@@ -8,10 +8,10 @@ import * as Paths from '../../path';
 
 class AddingProviders extends Component {
 	componentDidMount() {
-		if( this.props.match.params.name ) {
-			this.props.getOneProvider(this.props.match.params.name )
+		if( this.props.match.params.id ) {
+			this.props.getOneProvider(this.props.match.params.id )
 		}
-		else if( !this.props.name ){
+		else if( !this.props.id_provider ){
 			this.props.clearForm();
 		}
 	}
@@ -27,7 +27,7 @@ class AddingProviders extends Component {
 		showSaveBotton = () => (
 			<div className="row">
 		      <Button className="col s6 offset-m2 m4" waves='light'
-		              disabled={ !this.validForm() }
+		              disabled={ this.validForm() }
 		              onClick={ this.clickSave }>
 		        Save
 		      </Button>
@@ -45,13 +45,12 @@ class AddingProviders extends Component {
 		  );
 
 		validForm = () =>
-    this.props.providers.name && this.props.providers.address && this.props.providers.phone && this.props.providers.rfc;
+    		this.props.providers.name && this.props.providers.address && this.props.providers.phone && this.props.providers.rfc;
 
     	clickSave = () => {
-    		const name = this.props.providers.name;
-    		const address = this.props.providers.address;
-    		const phone = this.props.providers.address;
-    		const rfc = this.props.providers.rfc;
+    		const providerData = this.createNewProvider();
+    		const idProvider = this.props.match.params.id;
+    		idProvider ? this.props.modifyProvider(idProvider, providerData) : this.props.addProviders(providerData)
     	};
 
   render () {

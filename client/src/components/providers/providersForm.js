@@ -6,6 +6,11 @@ import AddProviders from './addingProviders';
 
 const ProvidersForm = (props) => {
 
+  const addName = (event) => props.addName(event.target.value);
+  const addAddress = (event) => props.addAddress(event.target.value);
+  const addPhone = (event) => props.addPhone(event.target.value);
+  const addRFC = (event) => props.addRFC(event.target.value);
+
   return (
     <div className="row">
       <Input s={12} m={6} label="Name" type='text' placeholder=' '
@@ -22,4 +27,4 @@ const ProvidersForm = (props) => {
 
 const mapStateToProps = ({ ProvidersReducers }) => ProvidersReducers;
 
-export default connect(mapStateToProps, ProvidersActions) (ProvidersForm);
+export default connect(mapStateToProps, ProvidersActions)(ProvidersForm);

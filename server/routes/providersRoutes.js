@@ -27,11 +27,11 @@ module.exports = (app) => {
 
 
 	app.post(
-		'/api/providers/',
-        providersMiddleware.completeData,
-        providersMiddleware.primitiveData,
-        providersMiddleware.validData,
-        providersMiddleware.validateProducts,
+		'/api/providers',
+        // providersMiddleware.completeData,
+        // providersMiddleware.primitiveData,
+        // providersMiddleware.validData,
+        // providersMiddleware.validateProducts,
 
 		async (req, res) => {
 		const { name, category, address, phone, rfc, products } = req.body;
@@ -51,10 +51,10 @@ module.exports = (app) => {
 
 	app.put(
 		'/api/providers/:id',
-        providersMiddleware.completeData,
-        providersMiddleware.primitiveData,
-        providersMiddleware.validData,
-        providersMiddleware.validateProducts,
+        // providersMiddleware.completeData,
+        // providersMiddleware.primitiveData,
+        // providersMiddleware.validData,
+        // providersMiddleware.validateProducts,
 		async (req, res) => {
 		const { name, category, address, phone, rfc, products} = req.body;
 		const response = await Providers.findOneAndUpdate(
