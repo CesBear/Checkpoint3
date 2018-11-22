@@ -1,23 +1,30 @@
-import React, {Component} from 'react';
-import {CardTitle, Card, Chip, Col, Icon, Row, Tag} from "react-materialize";
+import React, { Component } from 'react';
+import { CardTitle, Card, Col } from "react-materialize";
+import ProductModal from "../ProductsModal";
 
 class CardInfo extends Component {
 
     render() {
         return (
-            <Card header={<CardTitle reveal image={"default.png"} waves='light'/>}
-                  title="Provider Products"
-                  reveal={<Row>
-                      <Col s={12}>
-                          <Chip>
-                              <Icon>build</Icon>
-                               Llave Allen
-                          </Chip>
-                          <Tag>Disponible</Tag>
-                      </Col>
-                  </Row>}>
-                <p>Click to check products</p>
-            </Card>
+            <Col m={7} s={12}>
+                <Card horizontal header={
+                    <CardTitle image="./cd-default.jpg">
+                        <strong style={
+                            {color: 'black'}
+                        }
+                        >
+                            Deftones
+                        </strong>
+                    </CardTitle>
+                } actions={
+                    [
+                        <ProductModal/>
+                    ]
+                }>
+                    <p> Band from USA and commited to update the gnre about Rock and R&B
+                    </p>
+                </Card>
+            </Col>
         );
     }
 }

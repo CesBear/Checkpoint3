@@ -4,10 +4,6 @@ import Header from './Header';
 import Shopping from "./Shopping";
 
 class App extends Component {
-
-
-
-
     render() {
         return (
             <div>
@@ -19,7 +15,7 @@ class App extends Component {
                             <Route exact path='/' />
                             <Route exact path='/providers' />
                             <Route exact path='/shopping' component={Shopping}/>
-                            <Route exact path='/purchaseOrders'/>
+                            <Route exact path='/oc'/>
                         </div>
                     </div>
                 </BrowserRouter>

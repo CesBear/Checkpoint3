@@ -18,3 +18,9 @@ code {
   justify-content: space-around;
   flex-direction: row;
 }
+
+
+.counterBtn {
+  border: black 1px solid;
+  margin: 6px;
+}

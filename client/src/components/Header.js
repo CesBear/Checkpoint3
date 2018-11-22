@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {Navbar, Icon} from 'react-materialize';
-import SideNavCart from "./SideNavCart";
+import SideNavCart from "./Shopping/SideNavCart";
 
 const Header = (props) =>
     (
@@ -13,13 +13,13 @@ const Header = (props) =>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/providers">
-                        Providers
+                    <Link to="/artist">
+                        Artist
                     </Link>
                 </li>
                 <li>
-                    <Link to="/orders">
-                        Orders
+                    <Link to="/shopping">
+                    Buy Music!
                     </Link>
                 </li>
                 <li>

@@ -1,17 +1,15 @@
 import React, {Component} from 'react';
-import CardInfo from "./CardInfo"
+import CardInfo from "./CardInfo";
 
 class Shopping extends Component {
 
-    componentDidMount() {
-    }
-
-
-    render() {
+    render(){
         return (
             <div>
-                <h3>Providers / Products</h3>
-                <div className="spacing">
+            <h3>Hola!  'XXXXXX'  </h3>
+                <p>Encuentra los albums y canciones de  tus artistas favoritos y no olvides añádirlos a tu orden de compra</p>
+                <br/>
+                <div className='spacing'>
                     <CardInfo/>
                 </div>
             </div>
@@ -20,3 +18,4 @@ class Shopping extends Component {
 }
 
 export default Shopping;
+
