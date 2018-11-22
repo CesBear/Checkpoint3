@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
-import Header from './Header';
+import Header from "./Header";
 import Shopping from "./Shopping";
-
+import Oc from "./Oc";
 class App extends Component {
 
 
@@ -20,6 +20,7 @@ class App extends Component {
                             <Route exact path='/providers' />
                             <Route exact path='/shopping' component={Shopping}/>
                             <Route exact path='/purchaseOrders'/>
+                            <Route exact path='/oc' component={Oc}/>
                         </div>
                     </div>
                 </BrowserRouter>

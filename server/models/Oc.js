@@ -15,6 +15,12 @@ const ocSchema = new Schema({
   		subtotal: Number
   	}
   ],
+  client: {
+    name: String, 
+    email: String, 
+    address: String, 
+    phone: String
+  }
   total: Number
 });
 
