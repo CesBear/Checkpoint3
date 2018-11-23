@@ -12,3 +12,6 @@ export const ADD_ADDRESS = 'add_address';
 export const ADD_PHONE = 'add_phone';
 export const ADD_RFC = 'add_rfc';
 export const MODIFIED_PROVIDER = 'modify_provider';
+export const PROVIDERS_LOADING = 'providers_loading';
+export const ADD_CATEGORY = 'add_category';
+export const ADD_PRODUCTS = 'add_products';

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
 	CALL_PROVIDERS, 
-	PROVIDERS_LOADED, 
+	PROVIDERS_LOADING, 
 	FAIL_TO_LOAD_PROVIDERS, 
 	CLEAR_FAIL, 
 	LOADING_ONE_PROVIDER, 
@@ -13,7 +13,9 @@ import {
 	ADD_NAME,
 	ADD_ADDRESS,
 	ADD_PHONE,
-	ADD_RFC
+	ADD_RFC,
+	ADD_CATEGORY,
+	ADD_PRODUCTS
 } from '../types/providersTypes';
 
 const TIME_TOAST = 6000;
@@ -23,10 +25,11 @@ export const bringProviders = () => async (dispatch) => {
 
 	try {
 		const response = await axios.get('http://localhost:5000/api/providers');
-		dispatch({ type: PROVIDERS_LOADED, payload: response.data });
+		response.data.reverse();
+		dispatch({ type: PROVIDERS_LOADING, payload: response.data });
 	}
 	catch(err) {
-		dispatch({ tupe: FAIL_TO_LOAD_PROVIDERS, payload: err });
+		dispatch({ type: FAIL_TO_LOAD_PROVIDERS, payload: err });
 	}
 };
 
@@ -46,7 +49,7 @@ export const addProviders = (newProvider) => async (dispatch) => {
 export const getOneProvider = (id) => async (dispatch) => {
 	dispatch({ type: CALL_PROVIDERS });
 	try {
-		const response = await axios.get('http://localhost:5000/api/providers');
+		const response = await axios.get(`http://localhost:5000/api/providers/${id}`);
 		dispatch({ type: LOADING_ONE_PROVIDER, payload: response.data[0] });
 	}
 	catch (err) {
@@ -58,7 +61,7 @@ export const getOneProvider = (id) => async (dispatch) => {
 export const modifyProvider = ( id, providerUpdated ) => async(dispatch) => {
 	dispatch ({ type: CALL_PROVIDERS });
 	try{
-		const response = await axios.post('http://localhost:5000/api/providers', providerUpdated);
+		const response = await axios.post(`http://localhost:5000/api/providers/${id}`, providerUpdated);
 		dispatch({ type: MODIFIED_PROVIDER });
 		dispatch({ type: CLEAR_FORM });
 		dispatch({ type: REDIRECTING, payload: true });
@@ -72,7 +75,7 @@ export const modifyProvider = ( id, providerUpdated ) => async(dispatch) => {
 export const deleteProvider = (id) => async (dispatch) => {
 	dispatch({ type: CALL_PROVIDERS });
 	try {
-		const response = await axios.delete('http://localhost:5000/api/providers');
+		const response = await axios.delete(`http://localhost:5000/api/providers/${id}`);
 		response.data.reverse();
 		dispatch({ type: DELETE_PROVIDER, payload: id });
 	}
@@ -93,24 +96,26 @@ export const clearForm = () => (dispatch) => dispatch({ type: CLEAR_FORM });
 
 export const clearErr = () => (dispatch) => dispatch({type: CLEAR_FAIL});
 
-export const addName = (name) => (dispatch) => {
+export const AddName = (name) => (dispatch) => {
 	dispatch({ type: ADD_NAME, payload: name });
 };
 
-export const addAddress = (address) => (dispatch) => {
+export const AddAddress = (address) => (dispatch) => {
 	dispatch({ type: ADD_ADDRESS, payload: address });
 };
 
-export const addPhone = (phone) => (dispatch) => {
+export const AddPhone = (phone) => (dispatch) => {
 	dispatch({ type: ADD_PHONE, payload: phone });
 };
 
-export const addRFC = (rfc) => (dispatch) => {
+export const AddRFC = (rfc) => (dispatch) => {
 	dispatch({ type: ADD_RFC, payload: rfc });
 };
 
+export const AddCategory = (category) => (dispatch) => {
+	dispatch({ type: ADD_CATEGORY, payload: category });
+};
 
-
-
-
-
+export const AddProducts = (products) => (dispatch) => {
+	dispatch({ type: ADD_PRODUCTS, payload: products });
+};

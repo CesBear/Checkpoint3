@@ -12,42 +12,47 @@ import {
 	ADD_NAME,
 	ADD_ADDRESS,
 	ADD_PHONE,
-	ADD_RFC
+	ADD_RFC,
+	PROVIDERS_LOADING,
+	ADD_CATEGORY,
+	ADD_PRODUCTS
 } from '../types/providersTypes';
 
 
 const INITIAL_SATE = {
-	providers: [{
-		name: {
-          type: ''
-   		},
-        category: {
-          type: '',
-   		},
+	providers: [],
+		artistId: '',
+		name: '',
+        category: '',
         address: '',
-        phone: 0,
+        phone: '',
         rfc: '',
-        products: [{
-          _id: 0,
+        products: [],
+          _id: '',
           brand: '',
-          price: 0,
-          stock: 0,
-          guarantee: ''
-          }]
-    }],
+          price: '',
+          stock: '',
+          guarantee: '',
     redirect: false,
     err:'',
     loading: false
 };
 
 export default ( state = INITIAL_SATE, action ) => {
-	const getProvider = (name) => state.providers.findIndex((provider) => {
-		return provider._id === name
+	const getProvider = (artistId) => state.providers.findIndex((provider) => {
+		return provider._id === artistId
 	});
 
 	switch (action.type) {
-		case CALL_PROVIDERS : return { ...state, err:'', loading: true };
-		case PROVIDERS_LOADED : return { ...state, err:'', loading: false, providers: action.payload };
+		case CALL_PROVIDERS : return { 
+			...state, 
+			err:'', 
+			loading: true 
+		};
+		case PROVIDERS_LOADED : return { ...state, 
+										 err:'', 
+										 loading: false, 
+										 providers: action.payload };
 		case FAIL_TO_LOAD_PROVIDERS : return { ...state, err: action.payload, loading: false };
 		case CLEAR_FAIL : return { ...state, arr:''};
 		case LOADING_ONE_PROVIDER : return { ...state, 
@@ -58,10 +63,15 @@ export default ( state = INITIAL_SATE, action ) => {
 											rfc: action.payload.rfc, 
 											category: action.payload.category, 
 											products: action.payload.products,
+											artistId: action.payload._id,
 											redirect: false };
-		case CREATE_NEW_PROVIDER : return { ...state, loading: false, providers: [action.payload, ...state.providers] };
+		case CREATE_NEW_PROVIDER : return { 
+			...state, 
+			loading: false, 
+			providers: [action.payload, ...state.providers]
+		};
 		case DELETE_PROVIDER : 
-			const deleteName = getProvider(action.payload.name)
+			const deleteName = getProvider(action.payload);
 
 			if(deleteName >= 0 ) {
 				state.providers.splice( deleteName, 1 );
@@ -69,27 +79,22 @@ export default ( state = INITIAL_SATE, action ) => {
 			return { ...state, loading: false }; 
 		case REDIRECTING : return { ...state, redirect: action.payload };
 		case CLEAR_FORM : return { ...state, 
-									providers: [{
-										name: {
-								          type: ''
-								   		},
-								        category: {
-								          type: '',
-								   		},
+									providers: [],
+										artistId:'',
+										name: '',
+								        category: '',
 								        address: '',
-								        phone: 0,
+								        phone: '',
 								        rfc: '',
-								        products: [{
-								          _id: 0,
+								        products: [],
+								          _id: '',
 								          brand: '',
-								          price: 0,
-								          stock: 0,
-								          guarantee: ''
-								          }],
+								          price: '',
+								          stock: '',
+								          guarantee: '',
 								        redirect: false,
 								        err:'',
-								        loading: false
-									}]	
+								        loading: false						
 		};
 		case MODIFIED_PROVIDER:
 	      const idModificado = getProvider(action.payload._id);
@@ -102,6 +107,10 @@ export default ( state = INITIAL_SATE, action ) => {
 	    case ADD_ADDRESS: return { ...state, address: action.payload };
 	    case ADD_PHONE: return { ...state, phone: action.payload };
 	    case ADD_RFC: return { ...state, rfc: action.payload };
+	    case ADD_CATEGORY: return { ...state, category: action.payload };
+	    case ADD_PRODUCTS: return { ...state, products: action.payload };
+
+	    case PROVIDERS_LOADING: return { ...state, loading: false, providersConsult: true };
 
 		default: return state;
 	}

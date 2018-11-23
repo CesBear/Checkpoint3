@@ -34,18 +34,24 @@ module.exports = (app) => {
         // providersMiddleware.validateProducts,
 
 		async (req, res) => {
-		const { name, category, address, phone, rfc, products } = req.body;
+		try {
+			const { name, category, address, phone, rfc, products } = req.body;
 
-		const providersPost = new Providers({
-			name,
-            category,
-			address,
-			phone,
-			rfc,
-			products
-		});
-		const response = await providersPost.save();
-		res.send(response);
+			const providersPost = new Providers({
+				name,
+	            category,
+				address,
+				phone,
+				rfc,
+				products
+			});
+			const response = await providersPost.save();
+			res.send(response);
+		}
+		catch(error) {
+			console.log(error.message);
+			res.send(error.message);
+		}
 	});
 
 
